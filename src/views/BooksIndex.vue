@@ -1,15 +1,12 @@
-<template>
-  <div class="home">
+  <template>
+  <div class="container">
     <h1>All Books</h1>
     <div v-for="book in books">
-      <h2>{{ book.name }}</h2>
+      <h2>Title: {{ book.title }}</h2>
       <p>Pages: {{ book.pages }}</p>
     </div>
   </div>
 </template>
-
-<style>
-</style>
 
 <script>
 import axios from "axios";
@@ -20,7 +17,11 @@ export default {
       books: []
     };
   },
-  created: function() {},
+  created: function() {
+    axios.get("/api/books").then(response => {
+      this.books = response.data;
+    });
+  },
   methods: {}
 };
 </script>
